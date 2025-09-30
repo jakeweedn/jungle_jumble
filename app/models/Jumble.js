@@ -15,6 +15,17 @@ export class Jumble {
 
     get listTemplate() {
 
-        return `<li> ${this.name} </li>`
+        return `<li> ${this.name} </li>
+        <button class ="w-25" onclick = "app.jumblesController.selectActiveJumble('${this.id}')"> Start </button>
+        
+        
+        `
+
+
+    }
+
+    get activeJumbleTemplate() {
+
+        return
     }
 }
