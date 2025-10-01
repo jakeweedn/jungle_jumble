@@ -26,6 +26,21 @@ export class Jumble {
 
     get activeJumbleTemplate() {
 
-        return
+        return `
+        <article class="card">
+      <div class="card-body">
+        <h2>${this.name}</h2>
+        <p> ${this.body}</p>
+
+        <form>
+
+          <textarea id="case-file-body" name="body" class="form-control case-file-body" placeholder = "Start typing here!"></textarea>
+          <button class="btn btn-teal mt-2"> Save 🛟 </button>
+
+        </form>
+      </div>
+      </article>
+        
+        `
     }
 }

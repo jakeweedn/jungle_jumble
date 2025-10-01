@@ -5,6 +5,9 @@ export class JumblesController {
     constructor() {
 
         this.drawJumbles()
+        this.drawActiveJumble
+        AppState.on('jumbles', this.drawJumbles)
+        AppState.on('activeJumble', this.drawActiveJumble)
 
 
     }
@@ -24,6 +27,27 @@ export class JumblesController {
 
         console.log('🍌', jumbleId);
         jumblesService.selectActiveJumble(jumbleId)
+
+    }
+
+    drawActiveJumble() {
+
+        const activeJumbleElement = document.getElementById("active-jumble")
+        const activeJumble = AppState.activeJumble
+        if (activeJumble != null) {
+
+            activeJumbleElement.innerHTML = activeJumble.activeJumbleTemplate
+
+        } else {
+            activeJumbleElement.innerHTML = `
+                <div class = "card text-secondary p-4">
+                    <h2> Please Select a Jumble to get started </h2>
+                </div> 
+            
+                `
+        }
+
+
 
     }
 
