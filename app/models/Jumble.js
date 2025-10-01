@@ -32,9 +32,9 @@ export class Jumble {
         <h2>${this.name}</h2>
         <p> ${this.body}</p>
 
-        <form>
+        <form onsubmit = "app.jumblesController.saveActiveJumble()">
 
-          <textarea id="case-file-body" name="body" class="form-control case-file-body" placeholder = "Start typing here!"></textarea>
+          <textarea id="jumble-body" name="body" class="form-control case-file-body" placeholder = "Start typing here!"></textarea>
           <button class="btn btn-teal mt-2"> Save 🛟 </button>
 
         </form>

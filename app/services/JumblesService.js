@@ -15,6 +15,32 @@ class JumblesService {
         console.log('💰', AppState.activeJumble)
     }
 
+    saveActiveJumble(updatedData) {
+
+        const activeJumble = AppState.activeJumble
+
+
+
+
+        if (updatedData.body !== activeJumble.body) {
+            console.log('Input not correct', activeJumble, updatedData.body)
+            return
+        }
+        else {
+            this.saveJumblesToLocal()
+
+
+
+        }
+
+
+
+    }
+
+    saveJumblesToLocal() {
+
+
+    }
 
 }
 

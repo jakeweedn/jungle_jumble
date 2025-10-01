@@ -1,5 +1,6 @@
 import { AppState } from "../AppState.js";
 import { jumblesService } from "../services/JumblesService.js";
+import { getFormData } from "../utils/FormHandler.js";
 
 export class JumblesController {
     constructor() {
@@ -46,6 +47,22 @@ export class JumblesController {
             
                 `
         }
+
+
+
+    }
+
+    saveActiveJumble() {
+
+        event.preventDefault()
+        console.log('🥬');
+
+        let form = event.target
+        console.log('🎯', form);
+        let formData = getFormData(form)
+        console.log('✏️', formData)
+
+        jumblesService.saveActiveJumble(formData)
 
 
 
