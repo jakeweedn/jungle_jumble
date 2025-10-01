@@ -7,7 +7,7 @@ export class Jumble {
     this.name = data.name;
     this.body = data.body || '';
 
-    this.fastestTime = null;
+    this.fastestTime = Infinity;
     this.startTime = null;
     this.endTime = null;
 
@@ -16,8 +16,14 @@ export class Jumble {
 
   get listTemplate() {
 
-    return `<li> ${this.name} </li>
-        <button class ="w-25" onclick = "app.jumblesController.selectActiveJumble('${this.id}')"> Start </button>
+    return `
+        <li>
+          <p>
+            ${this.name} - ${this.fastestTime == Infinity ? 'Not Started' : this.fastestTime} 
+          </p> 
+
+          <button class ="w-25" onclick = "app.jumblesController.selectActiveJumble('${this.id}')"> Start </button>
+        </li>
         
         
         `

@@ -33,7 +33,7 @@ class JumblesService {
         }
         else {
             console.log('Input correct')
-            this.saveJumblesToLocal()
+            // this.saveJumblesToLocal()
 
 
             this.endGame()
@@ -64,7 +64,8 @@ class JumblesService {
         const currentDate = new Date()
 
         activeJumble.startTime = currentDate
-        console.log('🍕', activeJumble)
+        // const seconds = currentDate.getSeconds(); //better way to get seconds?
+        // console.log('🍕', activeJumble)
 
 
     }
@@ -75,7 +76,23 @@ class JumblesService {
         const currentDate = new Date()
 
         activeJumble.endTime = currentDate
-        console.log('🍔', activeJumble)
+        const seconds = currentDate.getSeconds(); //better way to get seconds?
+
+        console.log('🍔', activeJumble, seconds)
+
+
+        const timeElapsed = activeJumble.endTime - activeJumble.startTime
+
+        console.log('time elapsed', timeElapsed)
+
+        if (AppState.activeJumble.fastestTime > timeElapsed) {
+            AppState.activeJumble.fastestTime = timeElapsed
+        }
+
+        AppState.emit('jumbles')
+
+        //Get time elapsed
+
 
 
     }
