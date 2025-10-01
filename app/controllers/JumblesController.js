@@ -64,6 +64,9 @@ export class JumblesController {
 
         jumblesService.saveActiveJumble(formData)
 
+        //@ts-ignore
+        form.reset()
+
 
 
     }
