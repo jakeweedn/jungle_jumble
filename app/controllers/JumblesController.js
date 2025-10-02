@@ -1,14 +1,21 @@
 import { AppState } from "../AppState.js";
 import { jumblesService } from "../services/JumblesService.js";
 import { getFormData } from "../utils/FormHandler.js";
+import { Jumble } from "../models/Jumble.js";
 
 export class JumblesController {
     constructor() {
 
         this.drawJumbles()
-        this.drawActiveJumble
+        this.drawActiveJumble()
         AppState.on('jumbles', this.drawJumbles)
-        AppState.on('activeJumble', this.drawActiveJumble)
+        AppState.on('activeJumble', this.drawActiveJumble, this)
+
+        jumblesService.loadJumblesFromLocal()
+
+
+
+
 
 
     }
@@ -24,12 +31,7 @@ export class JumblesController {
         jumbleListingElem.innerHTML = jumbleListingContent
     }
 
-    selectActiveJumble(jumbleId) {
 
-        console.log('🍌', jumbleId);
-        jumblesService.selectActiveJumble(jumbleId)
-
-    }
 
     drawActiveJumble() {
 
@@ -41,13 +43,44 @@ export class JumblesController {
 
         } else {
             activeJumbleElement.innerHTML = `
-                <div class = "card text-secondary p-4">
-                    <h2> Please Select a Jumble to get started </h2>
-                </div> 
+            <div class = "card text-secondary p-4">
+            <h2> Please Select a Jumble to get started </h2>
+            </div> 
             
-                `
+            `
         }
+        this.drawTimeElasped()
 
+
+
+    }
+
+    submitJumble() {
+
+        event.preventDefault()
+        let form = event.target
+
+        console.log('🌴')
+
+        const jumbleData = getFormData(form)
+        console.log("Jumble data from form", jumbleData)
+
+        jumblesService.createJumble(jumbleData)
+
+        //@ts-ignore
+        form.reset()
+
+
+
+
+
+
+    }
+
+    selectActiveJumble(jumbleId) {
+
+        console.log('🍌', jumbleId);
+        jumblesService.selectActiveJumble(jumbleId)
 
 
     }
@@ -66,6 +99,22 @@ export class JumblesController {
 
         //@ts-ignore
         form.reset()
+
+
+
+    }
+
+    drawTimeElasped() {
+
+        //observer above?
+        const timeElaspedElement = document.getElementById('time-elasped')
+        const activeJumble = AppState.activeJumble
+        if (!activeJumble) { return }
+
+        if (activeJumble.timeElapsed) {
+
+            timeElaspedElement.innerHTML = activeJumble.timeElaspedTemplate
+        }
 
 
 

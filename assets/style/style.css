@@ -7,9 +7,9 @@ body {
 
 main {
   flex-grow: 1;
-  display: flex;
-  place-content: center;
-  align-items: center;
+  /* display: flex; */
+  /* place-content: center; */
+  /* align-items: center; */
 }
 
 #pop-toast-container {

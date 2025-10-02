@@ -1,6 +1,6 @@
 import { AppState } from "../AppState.js";
 import { Jumble } from "../models/Jumble.js";
-import { saveState } from "../utils/Store.js";
+import { loadState, saveState } from "../utils/Store.js";
 
 
 
@@ -43,6 +43,71 @@ class JumblesService {
 
         }
 
+        this.saveJumblesToLocal()
+
+
+
+
+
+    }
+
+    createJumble(data) {
+
+        console.log("data in the service", data)
+        const newJumble = new Jumble(data)
+
+        AppState.jumbles.push(newJumble)
+        console.log('Jumbles after adding new jumble', AppState.jumbles)
+
+        this.saveJumblesToLocal()
+
+
+    }
+
+
+
+
+    startGame() {
+
+        const activeJumble = AppState.activeJumble
+        const currentDate = new Date()
+
+        activeJumble.startTime = currentDate
+        // const seconds = currentDate.getSeconds(); //better way to get seconds?
+        console.log('🍕', activeJumble)
+
+
+    }
+
+    endGame() {
+
+        const activeJumble = AppState.activeJumble
+        const currentDate = new Date()
+
+        activeJumble.endTime = currentDate
+        // const seconds = currentDate.getSeconds(); //better way to get seconds?
+
+        // console.log('🍔', activeJumble, seconds)
+
+
+        // const timeElapsed = activeJumble.endTime - activeJumble.startTime
+
+        console.log('time elapsed', activeJumble.timeElapsed)
+
+        if (AppState.activeJumble.fastestTime > activeJumble.timeElapsed) {
+            AppState.activeJumble.fastestTime = activeJumble.timeElapsed
+
+
+            //Convert timeElasped from milliseconds to seconds: 
+            // let seconds = timeElapsed / 1000
+            // console.log('new fastest time', seconds, 'seconds');
+        }
+
+        AppState.emit('jumbles')
+        AppState.emit('activeJumble')
+
+        //Get time elapsed
+
 
 
     }
@@ -55,47 +120,19 @@ class JumblesService {
 
 
 
-
     }
 
-    startGame() {
+    loadJumblesFromLocal() {
 
-        const activeJumble = AppState.activeJumble
-        const currentDate = new Date()
-
-        activeJumble.startTime = currentDate
-        // const seconds = currentDate.getSeconds(); //better way to get seconds?
-        // console.log('🍕', activeJumble)
-
-
+        let jumbles = loadState('jumbles', [Jumble])
+        console.log('loaded data🌹', jumbles)
+        AppState.jumbles = jumbles
     }
 
-    endGame() {
-
-        const activeJumble = AppState.activeJumble
-        const currentDate = new Date()
-
-        activeJumble.endTime = currentDate
-        const seconds = currentDate.getSeconds(); //better way to get seconds?
-
-        console.log('🍔', activeJumble, seconds)
-
-
-        const timeElapsed = activeJumble.endTime - activeJumble.startTime
-
-        console.log('time elapsed', timeElapsed)
-
-        if (AppState.activeJumble.fastestTime > timeElapsed) {
-            AppState.activeJumble.fastestTime = timeElapsed
-        }
-
-        AppState.emit('jumbles')
-
-        //Get time elapsed
+    //dont put emojis for save and load!! 
 
 
 
-    }
 }
 
 export const jumblesService = new JumblesService()

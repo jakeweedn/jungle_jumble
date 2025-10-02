@@ -23,33 +23,89 @@
   </header>
 
   <main class="container-fluid">
+    <div class="row">
 
-    <section id="jumble-listings" class="row">
+      <section class="col-md-3">
+        <div id="jumble-listings" class="list-group p-3">
 
+        </div>
 
-    </section>
-
-
-    <section id="active-jumble" class="row">
-
-      <!-- Below is my Active Jumble Template -->
-
-      <!-- <article class="card"> </article>
-      <div class="card-body">
-        <h2>${this.name}</h2>
-        <p> ${this.body}</p>
-
-        <form>
-
-          <textarea id="case-file-body" name="body" class="form-control case-file-body"> Start typing here! </textarea>
-          <button class="btn btn-teal mt-2"> Save 🛟 </button>
-
-        </form>
-      </div>
-      </article> -->.
+      </section>
 
 
-    </section>
+      <section id="active-jumble" class="col-md-6">
+
+        <!-- Below is my Active Jumble Template -->
+
+        <!-- <article class="card"> </article>
+        <div class="card-body">
+          <h2>${this.name}</h2>
+          <p> ${this.body}</p>
+          
+          <form>
+            
+            <textarea id="case-file-body" name="body" class="form-control case-file-body"> Start typing here! </textarea>
+            <button class="btn btn-teal mt-2"> Save 🛟 </button>
+            
+          </form>
+        </div>
+      </article> -->
+
+
+      </section>
+
+      <section id="time-elasped" class="col-md-3">
+
+        <!-- Below is my Time Elasped Template:  -->
+
+        <!-- <h2> Time Elasped:</h2>
+      <p>0 </p> -->
+
+
+      </section>
+    </div>
+
+    <div class="row my-3">
+
+      <h2>Create your own! </h2>
+
+      <form onsubmit="app.jumblesController.submitJumble()">
+
+
+        <div>
+
+          <label for="jumble-name"> Jumble Name</label>
+          <input id="jumble-name" type="text" name="name" minlength="3" maxlength="30" required>
+
+        </div>
+
+        <div class="my-3">
+
+          <label for="jumble-body"> Jumble Body</label>
+          <input id="jumble-body" type="text" name="body" minlength="10" , maxlength="500">
+
+        </div>
+
+        <div class="mt-3">
+
+          <button type="reset"> Reset </button>
+          <button type="submit">Submit </button>
+
+
+        </div>
+
+      </form>
+
+
+    </div>
+
+
+
+
+
+
+
+    </div>
 
 
   </main>
